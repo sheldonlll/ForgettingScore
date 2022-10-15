@@ -146,7 +146,7 @@ def main():
         prepare_data(file_data) #处理格式错误
         tot_forgetting_score, unforgettable_examples, forgettable_examples, first_learning_event_happened_state, first_forgetting_event_happend_state = Algorithm_1_Computing_forgetting_statistics(to_shuffle = False) #计算forgettingscore
         with open("forgetting_score_results.txt", "w+") as f:
-            data = "tot_forgetting_score:\n" + str(tot_forgetting_score) + "\n" + "unforgettable_examples:\n"+ str(unforgettable_examples) + "\n" + "forgettable_examples:\n" + str(forgettable_examples)
+            data = "tot_forgetting_score:\n" + str(tot_forgetting_score) + "\n" + "\nunforgettable_examples:\n"+ str(unforgettable_examples) + "\n" + "\nforgettable_examples:\n" + str(forgettable_examples) + "\nfirst_learning_event_happened_state:\n" + str(first_learning_event_happened_state) + "\nfirst_forgetting_event_happend_state:\n" + str(first_forgetting_event_happend_state)
             f.write(data)
         # x, label, cifar10_train_dataloader, cifar10_test_dataloader = handl_train_data(tot_forgetting_score, unforgettable_examples, forgettable_examples, first_learning_event_happened_state, first_forgetting_event_happend_state)
         # train_again(x, label, cifar10_train_dataloader, cifar10_test_dataloader)
