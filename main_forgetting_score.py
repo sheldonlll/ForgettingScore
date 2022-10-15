@@ -50,8 +50,10 @@ idx: 769
 
 def Algorithm_1_Computing_forgetting_statistics(to_shuffle = False):
     """
-    Acci(t) > Acci(t + 1): forgetting event happened, then scorei -= 1
-    Acci(t) < Acci(t + 1): learning event happened, then scorei += 1
+    Acci(t) > Acci(t + 1): forgetting event happened, then scorei -= 2
+    Acci(t) == Acci(t + 1) && Acci(t) == 0: then scorei -= 1
+    Acci(t) == Acci(t + 1) && Acci(t) == 1: then scorei += 1
+    Acci(t) < Acci(t + 1): learning event happened, then scorei += 2
     example i: the forgetting event never happened && learning event once happend => unforgettable example i
     example i: the forgetting event has happend once. => forgettable example
     the first learning event
@@ -86,7 +88,15 @@ def Algorithm_1_Computing_forgetting_statistics(to_shuffle = False):
             if first_forgetting_event_happend_state[i] == -1 and learning_event_happend_state[i] and current_acc < next_acc:
                 first_forgetting_event_happend_state[i] = current_batch_idx
             
-            tot_forgetting_score[i] += 1 if current_acc < next_acc else -1
+            if current_acc > next_acc:
+                tot_forgetting_score[i] -= 2
+            elif current_acc == next_acc and current_acc == 0:
+                tot_forgetting_score[i] -= 1
+            elif current_acc == next_acc and current_acc == 1:
+                tot_forgetting_score[i] += 1
+            elif current_acc < next_acc:
+                tot_forgetting_score[i] += 2
+        
             forgetting_event_happend_state[i] = True if current_acc > next_acc else forgetting_event_happend_state[i]
             learning_event_happend_state[i] = True if current_acc > next_acc else learning_event_happend_state[i]
             
