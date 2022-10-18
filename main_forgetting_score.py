@@ -98,7 +98,7 @@ def Algorithm_1_Computing_forgetting_statistics(to_shuffle = False):
                 tot_forgetting_score[i] += 2
         
             forgetting_event_happend_state[i] = True if current_acc > next_acc else forgetting_event_happend_state[i]
-            learning_event_happend_state[i] = True if current_acc > next_acc else learning_event_happend_state[i]
+            learning_event_happend_state[i] = True if current_acc < next_acc else learning_event_happend_state[i]
             
 
     for i in range(len_per_epoch):
